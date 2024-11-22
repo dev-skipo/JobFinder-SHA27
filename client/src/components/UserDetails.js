@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import { Container, Row, Col, Card, ListGroup, Alert } from 'react-bootstrap';
 
 function UserDetails() {
     const { id } = useParams(); // Get the user ID from the URL
@@ -29,7 +30,7 @@ function UserDetails() {
                 });
                 setPosts(postsResponse.data); // Set user's posts
             } catch (err) {
-                alert('Failed to fetch user data');
+                console.log('Failed to fetch user data');
             } finally {
                 setLoading(false);
             }
@@ -44,39 +45,57 @@ function UserDetails() {
 
     if (!isLoggedIn) {
         return (
-            <div>
-                <p>Please <Link to="/login" style={{ color: 'blue', textDecoration: 'underline' }}>log in</Link> to see this profile.</p>
-            </div>
+            <Container className="mt-5">
+                <Alert variant="warning">
+                    Please <Link to="/login" style={{ color: 'blue', textDecoration: 'underline' }}>log in</Link> to see this profile.
+                </Alert>
+            </Container>
         );
     }
 
     if (!user) return <p>No user found.</p>;
 
     return (
-        <div>
-            <h1>User Details</h1>
-            <p><strong>Full Name:</strong> {user.fullName}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Country:</strong> {user.country}</p>
-            <p><strong>City:</strong> {user.city}</p>
-            <p><strong>Address:</strong> {user.address}</p>
-            <p><strong>Zip Code:</strong> {user.zipCode}</p>
-            <p><strong>Phone Number:</strong> {user.phoneNumber}</p>
+        <Container className="mt-5">
+            <Row>
+                {/* User Details Section */}
+                <Col md={6}>
+                <h2 className="text-center">User Profile</h2>
+                    <Card className="mb-4">
+                        <Card.Body>
+                            <Card.Title>{user.fullName}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{user.email}</Card.Subtitle>
+                            <ListGroup variant="flush">
+                                <ListGroup.Item><strong>Country:</strong> {user.country}</ListGroup.Item>
+                                <ListGroup.Item><strong>City:</strong> {user.city}</ListGroup.Item>
+                                <ListGroup.Item><strong>Address:</strong> {user.address}</ListGroup.Item>
+                                <ListGroup.Item><strong>Zip Code:</strong> {user.zipCode}</ListGroup.Item>
+                                <ListGroup.Item><strong>Phone Number:</strong> {user.phoneNumber}</ListGroup.Item>
+                            </ListGroup>
+                        </Card.Body>
+                    </Card>
+                </Col>
 
-            <h2>Posts by {user.fullName}</h2>
-            {posts.length === 0 ? (
-                <p>No posts available.</p>
-            ) : (
-                posts.map(post => (
-                    <div key={post._id} style={{ border: '1px solid #ccc', marginBottom: '10px', padding: '10px' }}>
-                        <Link to={`/feeds/${post._id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                            <h3>{post.title}</h3>
-                            <p>{post.description}</p>
-                        </Link>
-                    </div>
-                ))
-            )}
-        </div>
+                {/* Related Posts Section */}
+                <Col md={6}>
+                    <h2 className="text-center">Posts by {user.fullName}</h2>
+                    {posts.length === 0 ? (
+                        <Alert variant="info" className="text-center">No posts available.</Alert>
+                    ) : (
+                        posts.slice(0, 5).map(post => ( // Limit to 5 posts
+                            <Card key={post._id} className="mb-3">
+                                <Card.Body>
+                                    <Link to={`/feeds/${post._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                        <Card.Title>{post.title}</Card.Title>
+                                        <Card.Text>{post.description}</Card.Text>
+                                    </Link>
+                                </Card.Body>
+                            </Card>
+                        ))
+                    )}
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

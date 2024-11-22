@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 
 function EditPost() {
     const { id } = useParams(); // Get the post ID from the URL
@@ -15,6 +16,8 @@ function EditPost() {
         location: '',
         contactInfo: ''
     });
+    const [errorMessage, setErrorMessage] = useState(''); // State for error message
+    const [successMessage, setSuccessMessage] = useState(''); // State for success message
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,7 +26,7 @@ function EditPost() {
                 const response = await axios.get(`http://localhost:5000/api/posts/${id}`);
                 setFormData(response.data);
             } catch (err) {
-                alert('Failed to fetch post data');
+                setErrorMessage('Failed to fetch post data');
             }
         };
 
@@ -43,39 +46,134 @@ function EditPost() {
                     Authorization: `Bearer ${token}`
                 }
             });
-            alert('Post updated successfully!');
+            setSuccessMessage('Post updated successfully!'); // Set success message
             navigate(`/feeds/${id}`); // Redirect back to post details after editing
         } catch (err) {
-            alert('Failed to update post');
+            setErrorMessage('Failed to update post'); // Set error message
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
-            <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} required />
-            <input name="requirement" placeholder="Requirement" value={formData.requirement} onChange={handleChange} required />
-            <input name="salary" placeholder="Salary" type="number" value={formData.salary} onChange={handleChange} required />
-            
-            <select name="position" value={formData.position} onChange={handleChange}>
-                <option value="hiring">Hiring</option>
-                <option value="looking for job">Looking for Job</option>
-            </select>
+        <Container className="mt-5">
+            <h1 className="text-center">Edit Post</h1>
+            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>} {/* Display error message */}
+            {successMessage && <Alert variant="success">{successMessage}</Alert>} {/* Display success message */}
+            <Form onSubmit={handleSubmit}>
+                <Row className="mb-3">
+                    <Col md={6}>
+                        <Form.Group controlId="formTitle">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name="title" 
+                                placeholder="Enter post title" 
+                                value={formData.title} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col md={12}>
+                        <Form.Group controlId="formDescription">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control 
+                                as="textarea" 
+                                name="description" 
+                                placeholder="Enter post description" 
+                                value={formData.description} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col md={6}>
+                        <Form.Group controlId="formRequirement">
+                            <Form.Label>Requirement</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name="requirement" 
+                                placeholder="Enter requirements" 
+                                value={formData.requirement} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId="formSalary">
+                            <Form.Label>Salary</Form.Label>
+                            <Form.Control 
+                                type="number" 
+                                name="salary" 
+                                placeholder="Enter salary" 
+                                value={formData.salary} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col md={6}>
+                        <Form.Group controlId="formPosition">
+                            <Form.Label>Position</Form.Label>
+                            <Form.Control as="select" name="position" value={formData.position} onChange={handleChange}>
+                                <option value="hiring">Hiring</option>
+                                <option value="looking for job">Looking for Job</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId="formTerms">
+                            <Form.Label>Terms</Form.Label>
+                            <Form.Control as="select" name="terms" value={formData.terms} onChange={handleChange}>
+                                <option value="full time">Full Time</option>
+                                <option value="part time">Part Time</option>
+                                <option value="contract">Contract</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="internship">Internship</option>
+                                <option value="remote">Remote</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col md={6}>
+                        <Form.Group controlId="formLocation">
+                            <Form.Label>Location</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name="location" 
+                                placeholder="Enter location" 
+                                value={formData.location} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId="formContactInfo">
+                            <Form.Label>Contact Info</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name="contactInfo" 
+                                placeholder="Enter contact information" 
+                                value={formData.contactInfo} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-            <select name="terms" value={formData.terms} onChange={handleChange}>
-                <option value="full time">Full Time</option>
-                <option value="part time">Part Time</option>
-                <option value="contract">Contract</option>
-                <option value="freelance">Freelance</option>
-                <option value="internship">Internship</option>
-                <option value="remote">Remote</option>
-            </select>
-
-            <input name="location" placeholder="Location" value={formData.location} onChange={handleChange} required />
-            <input name="contactInfo" placeholder="Contact Info" value={formData.contactInfo} onChange={handleChange} required />
-
-            <button type="submit">Update Post</button>
-        </form>
+                {/* Update Button */}
+                <Button variant="primary" type="submit">Update Post</Button> {/* Submit button */}
+            </Form>
+        </Container>
     );
 }
 

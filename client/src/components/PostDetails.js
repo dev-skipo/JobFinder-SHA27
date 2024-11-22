@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Card, ListGroup, Button, Alert, Modal } from 'react-bootstrap';
 
 function PostDetails() {
     const { id } = useParams(); // Get the post ID from the URL
@@ -9,6 +10,7 @@ function PostDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [relatedPosts, setRelatedPosts] = useState([]); // State for related posts
+    const [showModal, setShowModal] = useState(false); // State for modal visibility
     const navigate = useNavigate(); // For navigation after deletion
 
     useEffect(() => {
@@ -52,59 +54,95 @@ function PostDetails() {
     };
 
     return (
-        <div>
-            <h1>{post.title}</h1>
-            <p>
-                <strong>Posted By:</strong> 
-                {post.userId ? (
-                    <Link to={`/user/${post.userId._id}`} style={{ color: 'blue', textDecoration: 'underline' }}>
-                        {post.userId.fullName}
-                    </Link>
-                ) : (
-                    'Unknown User'
-                )}
-            </p>
-            <p>{post.description}</p>
-            <p><strong>Requirement:</strong> {post.requirement}</p>
-            <p><strong>Salary:</strong> ${post.salary}</p>
-            <p><strong>Position:</strong> {post.position}</p>
-            <p><strong>Terms:</strong> {post.terms}</p>
-            <p><strong>Location:</strong> {post.location}</p>
+        <Container className="mt-5">
+            <Row>
+                {/* Post Details Section */}
+                <Col md={8}> {/* Wider column for post details */}
+                <h1>{post.title}</h1>
+                    <Card className="mb-4">
+                        <Card.Body>
+                        {/* <Card.Title>{post.title}</Card.Title> */}
+                            <Card.Subtitle className="mb-2 text-muted">
+                                Posted By: 
+                                {post.userId ? (
+                                    <Link to={`/user/${post.userId._id}`} style={{ color: 'blue', textDecoration: 'underline' }}>
+                                        {post.userId.fullName}
+                                    </Link>
+                                ) : (
+                                    ' Unknown User'
+                                )}
+                            </Card.Subtitle>
+                            <Card.Text>{post.description}</Card.Text>
+                            <ListGroup variant="flush">
+                                <ListGroup.Item><strong><i class="bi bi-search"></i> Requirement:</strong> {post.requirement}</ListGroup.Item>
+                                <ListGroup.Item><strong><i class="bi bi-currency-dollar"></i> Salary:</strong> ${post.salary}</ListGroup.Item>
+                                <ListGroup.Item><strong><i class="bi bi-signpost-split-fill"></i> Position:</strong> {post.position}</ListGroup.Item>
+                                <ListGroup.Item><strong><i class="bi bi-building-check"></i> Terms:</strong> {post.terms}</ListGroup.Item>
+                                <ListGroup.Item><strong><i class="bi bi-geo-alt-fill"></i> Location:</strong> {post.location}</ListGroup.Item>
+                            </ListGroup>
 
-            {token ? (
-                <>
-                    {post.userId && post.userId._id === userId && (
-                        <>
-                            <button onClick={() => navigate(`/edit-post/${id}`)}>Edit</button>
-                            <button onClick={handleDelete}>Delete</button>
-                        </>
+                            {token ? (
+                                <>
+                                    {post.userId && post.userId._id === userId && (
+                                        <>
+                                            <Button variant="warning" onClick={() => navigate(`/edit-post/${id}`)}>Edit</Button>
+                                            {' '}
+                                            <Button variant="danger" onClick={() => setShowModal(true)}>Delete</Button>
+                                        </>
+                                    )}
+                                    <p className="px-3 pt-4"><strong><i class="bi bi-envelope-check-fill"></i> Contact Info:</strong> {post.contactInfo}</p>
+                                </>
+                            ) : (
+                                <Alert variant="info">
+                                    <strong>Contact Info:</strong> 
+                                    <Link to="/login" style={{ color: 'blue', textDecoration: 'underline' }}>
+                                        # Login to see contact information
+                                    </Link>
+                                </Alert>
+                            )}
+                            
+                            <p className="mt-3"><small>Posted at: {new Date(post.postedAt).toLocaleString()}</small></p>
+                        </Card.Body>
+                    </Card>
+                </Col>
+
+                {/* Related Posts Section */}
+                <Col md={4}> {/* Narrower column for related posts */}
+                    <h2 className="text-start">Related Posts</h2>
+                    {relatedPosts.length === 0 ? (
+                        <Alert variant="info" className="text-center">No related posts available.</Alert>
+                    ) : (
+                        relatedPosts.slice(0, 5).map(relatedPost => ( // Limit to 5 posts
+                            <Card key={relatedPost._id} className="mb-3">
+                                <Card.Body>
+                                    <Link to={`/feeds/${relatedPost._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                        <Card.Title>{relatedPost.title}</Card.Title>
+                                        <Card.Text>{relatedPost.description}</Card.Text>
+                                    </Link>
+                                </Card.Body>
+                            </Card>
+                        ))
                     )}
-                    <p><strong>Contact Info:</strong> {post.contactInfo}</p>
-                </>
-            ) : (
-                <p>
-                    <strong>Contact Info:</strong> 
-                    <Link to="/login" style={{ color: 'blue', textDecoration: 'underline' }}>
-                        # Login to see contact information
-                    </Link>
-                </p>
-            )}
-            
-            <h2>Related Posts</h2>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {relatedPosts.map(relatedPost => (
-                    <div key={relatedPost._id} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px', width: '200px' }}>
-                        {/* Make the entire card clickable */}
-                        <Link to={`/feeds/${relatedPost._id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                            <h3>{relatedPost.title}</h3>
-                            <p>{relatedPost.description}</p>
-                        </Link>
-                    </div>
-                ))}
-            </div>
+                </Col>
+            </Row>
 
-            <p><small>Posted at: {new Date(post.postedAt).toLocaleString()}</small></p>
-        </div>
+            {/* Confirmation Modal for Deletion */}
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete this post? This action cannot be undone.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={() => { handleDelete(); setShowModal(false); }}>
+                        Delete Forever
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+        </Container>
     );
 }
 

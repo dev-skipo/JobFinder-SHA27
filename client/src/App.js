@@ -12,7 +12,10 @@ import EditPost from './components/EditPost';
 import Settings from './components/Settings'; 
 import Navbar from './components/Navbar'; 
 import Footer from './components/Footer'; 
+import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute
 import 'bootstrap/dist/css/bootstrap.min.css';
+// src/index.js or src/App.js
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Track login state
@@ -43,10 +46,23 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/feeds" element={<Feeds />} />
                 <Route path="/feeds/:id" element={<PostDetails />} />
-                <Route path="/post" element={<PostForm />} />
+                
+                {/* Protected routes */}
+                <Route path="/post" element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                        <PostForm />
+                    </PrivateRoute>
+                } />
+                
                 <Route path="/user/:id" element={<UserDetails />} /> 
                 <Route path="/edit-post/:id" element={<EditPost />} /> 
-                <Route path="/settings" element={<Settings />} /> {/* Route for settings */}
+
+                {/* Protected settings route */}
+                <Route path="/settings" element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                        <Settings />
+                    </PrivateRoute>
+                } />
             </Routes>
             <Footer /> {/* Add Footer here */}
         </Router>
