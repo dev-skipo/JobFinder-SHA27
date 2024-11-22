@@ -62,10 +62,10 @@ function PostDetails() {
                     <Card className="mb-4">
                         <Card.Body>
                         {/* <Card.Title>{post.title}</Card.Title> */}
-                            <Card.Subtitle className="mb-2 text-muted">
-                                Posted By: 
+                            <Card.Subtitle className="mb-2 text-muted p-2">
+                            Posted By:&nbsp;
                                 {post.userId ? (
-                                    <Link to={`/user/${post.userId._id}`} style={{ color: 'blue', textDecoration: 'underline' }}>
+                                     <Link to={`/user/${post.userId._id}`} style={{ color: 'blue', textDecoration: 'underline' }}>
                                         {post.userId.fullName}
                                     </Link>
                                 ) : (
@@ -85,9 +85,9 @@ function PostDetails() {
                                 <>
                                     {post.userId && post.userId._id === userId && (
                                         <>
-                                            <Button variant="warning" onClick={() => navigate(`/edit-post/${id}`)}>Edit</Button>
+                                            <Button variant="warning" onClick={() => navigate(`/edit-post/${id}`)}><i class="bi bi-pencil-fill"></i> Edit</Button>
                                             {' '}
-                                            <Button variant="danger" onClick={() => setShowModal(true)}>Delete</Button>
+                                            <Button variant="danger" onClick={() => setShowModal(true)}><i class="bi bi-trash3-fill"></i> Delete</Button>
                                         </>
                                     )}
                                    <p className="px-3 pt-4">
@@ -120,24 +120,27 @@ function PostDetails() {
                     </Card>
                 </Col>
 
-                {/* Related Posts Section */}
-                <Col md={4}> {/* Narrower column for related posts */}
-                    <h2 className="text-start">Related Posts</h2>
-                    {relatedPosts.length === 0 ? (
-                        <Alert variant="info" className="text-center">No related posts available.</Alert>
-                    ) : (
-                        relatedPosts.slice(0, 5).map(relatedPost => ( // Limit to 5 posts
-                            <Card key={relatedPost._id} className="mb-3">
-                                <Card.Body>
-                                    <Link to={`/feeds/${relatedPost._id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                                        <Card.Title>{relatedPost.title}</Card.Title>
-                                        <Card.Text>{relatedPost.description}</Card.Text>
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        ))
-                    )}
-                </Col>
+               {/* Related Posts Section */}
+<Col md={4}> {/* Narrower column for related posts */}
+    <h2 className="text-start">Related Posts</h2>
+    {relatedPosts.length === 0 ? (
+        <Alert variant="info" className="text-center">No related posts available.</Alert>
+    ) : (
+        relatedPosts.slice(0, 5).map(relatedPost => ( // Limit to 5 posts
+            <Card key={relatedPost._id} className="mb-3">
+                <Card.Body>
+                    <Link to={`/feeds/${relatedPost._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                        <Card.Title>{relatedPost.title}</Card.Title>
+                        {/* Truncate the description to a maximum of 100 characters */}
+                        <Card.Text>
+                            {relatedPost.description.length > 100 ? `${relatedPost.description.substring(0, 150)}...` : relatedPost.description}
+                        </Card.Text>
+                    </Link>
+                </Card.Body>
+            </Card>
+        ))
+    )}
+</Col>
             </Row>
 
             {/* Confirmation Modal for Deletion */}

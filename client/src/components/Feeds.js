@@ -20,8 +20,10 @@ function Feeds() {
     const fetchPosts = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/posts'); // Adjust endpoint as needed
-            setPosts(response.data); // Assuming response data is an array of posts
-            setFilteredPosts(response.data); // Initialize filtered posts with all posts
+            // Sort posts by postedAt date (newest first)
+            const sortedPosts = response.data.sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
+            setPosts(sortedPosts); // Set sorted posts
+            setFilteredPosts(sortedPosts); // Initialize filtered posts with all sorted posts
         } catch (err) {
             setError('Failed to fetch posts');
         } finally {
@@ -31,6 +33,13 @@ function Feeds() {
 
     useEffect(() => {
         fetchPosts(); // Fetch posts on component mount
+
+        // Set up polling to fetch posts every 10 seconds
+        const intervalId = setInterval(() => {
+            fetchPosts();
+        }, 10000); // Fetch every 10 seconds
+
+        return () => clearInterval(intervalId); // Clear interval on component unmount
     }, []);
 
     // Handle filtering logic
@@ -119,10 +128,13 @@ function Feeds() {
                                 <Card.Body>
                                     <Link to={`/feeds/${post._id}`} style={{ textDecoration: 'none', color: 'black' }}>
                                         <Card.Title>{post.title}</Card.Title>
-                                        <Card.Text><i class="bi bi-geo-alt-fill"></i> {post.location}</Card.Text>
-                                        <Card.Text>{post.description}</Card.Text>
-                                        <Card.Text><i class="bi bi-building-fill-exclamation"></i> {post.terms}</Card.Text>
-                                        <Card.Text><i class="bi bi-currency-dollar"></i> {post.salary}</Card.Text>
+                                        <Card.Text><i className="bi bi-geo-alt-fill"></i> {post.location}</Card.Text>
+                                        {/* Truncate the description to a maximum of 100 characters */}
+                                        <Card.Text>
+                                            {post.description.length > 100 ? `${post.description.substring(0, 200)}...` : post.description}
+                                        </Card.Text>
+                                        <Card.Text><i className="bi bi-building-fill-exclamation"></i> {post.terms}</Card.Text>
+                                        <Card.Text><i className="bi bi-currency-dollar"></i> {post.salary}</Card.Text>
                                     </Link>
                                 </Card.Body>
                             </Card>

@@ -7,11 +7,10 @@ function NavigationBar({ isLoggedIn, onLogout }) {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand as={Link} to="/">MyApp</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/"><i class="bi bi-triangle"></i> JobFinder</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end"> {/* Aligns items to the right */}
                     <Nav>
-                        <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/feeds">Feeds</Nav.Link>
                         {isLoggedIn ? (
                             <>

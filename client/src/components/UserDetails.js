@@ -77,7 +77,7 @@ function UserDetails() {
 
                 {/* Related Posts Section */}
                 <Col md={4}>
-                    <h2 className="text-start">Posts by {user.fullName}</h2>
+                    <h2 className="text-start">Related Posts</h2>
                     {posts.length === 0 ? (
                         <Alert variant="info" className="text-center">No posts available.</Alert>
                     ) : (

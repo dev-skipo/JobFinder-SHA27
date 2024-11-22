@@ -1,0 +1,7 @@
+/* src/components/Homepage.css */
+.hero {
+    height: 50vh; /* Full height for hero section */
+}
+.post-job {
+    height: 50vh; /* Full height for post job section */
+}
