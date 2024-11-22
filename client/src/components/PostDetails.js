@@ -75,7 +75,7 @@ function PostDetails() {
                             <Card.Text>{post.description}</Card.Text>
                             <ListGroup variant="flush">
                                 <ListGroup.Item><strong><i class="bi bi-search"></i> Requirement:</strong> {post.requirement}</ListGroup.Item>
-                                <ListGroup.Item><strong><i class="bi bi-currency-dollar"></i> Salary:</strong> ${post.salary}</ListGroup.Item>
+                                <ListGroup.Item><strong><i class="bi bi-currency-dollar"></i> Salary:</strong> {post.salary}</ListGroup.Item>
                                 <ListGroup.Item><strong><i class="bi bi-signpost-split-fill"></i> Position:</strong> {post.position}</ListGroup.Item>
                                 <ListGroup.Item><strong><i class="bi bi-building-check"></i> Terms:</strong> {post.terms}</ListGroup.Item>
                                 <ListGroup.Item><strong><i class="bi bi-geo-alt-fill"></i> Location:</strong> {post.location}</ListGroup.Item>
@@ -90,7 +90,21 @@ function PostDetails() {
                                             <Button variant="danger" onClick={() => setShowModal(true)}>Delete</Button>
                                         </>
                                     )}
-                                    <p className="px-3 pt-4"><strong><i class="bi bi-envelope-check-fill"></i> Contact Info:</strong> {post.contactInfo}</p>
+                                   <p className="px-3 pt-4">
+    <strong><i className="bi bi-envelope-check-fill"></i> Contact Info: </strong> 
+    <a 
+        href={
+            post.contactInfo.includes('@') ? `mailto:${post.contactInfo}` : // Email
+            post.contactInfo.startsWith('http') ? post.contactInfo : // URL
+            post.contactInfo.startsWith('+') || post.contactInfo.startsWith('0') ? `tel:${post.contactInfo}` : // Phone number
+            '#'
+        } 
+        style={{ textDecoration: 'none', color: 'blue' }}
+    >
+        {post.contactInfo}
+    </a>
+</p>
+                                   
                                 </>
                             ) : (
                                 <Alert variant="info">

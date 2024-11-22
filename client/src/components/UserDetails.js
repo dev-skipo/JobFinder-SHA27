@@ -59,26 +59,25 @@ function UserDetails() {
         <Container className="mt-5">
             <Row>
                 {/* User Details Section */}
-                <Col md={6}>
-                <h2 className="text-center">User Profile</h2>
+                <Col md={8}>
+                <h2 className="text-start"><i class="bi bi-person-fill"></i> {user.fullName}</h2>
                     <Card className="mb-4">
                         <Card.Body>
-                            <Card.Title>{user.fullName}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{user.email}</Card.Subtitle>
+                            {/*<Card.Title></Card.Title>*/}
+                             {/*<Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>*/}
                             <ListGroup variant="flush">
-                                <ListGroup.Item><strong>Country:</strong> {user.country}</ListGroup.Item>
-                                <ListGroup.Item><strong>City:</strong> {user.city}</ListGroup.Item>
-                                <ListGroup.Item><strong>Address:</strong> {user.address}</ListGroup.Item>
-                                <ListGroup.Item><strong>Zip Code:</strong> {user.zipCode}</ListGroup.Item>
-                                <ListGroup.Item><strong>Phone Number:</strong> {user.phoneNumber}</ListGroup.Item>
+                            <ListGroup.Item><strong><i class="bi bi-envelope-fill"></i> Mail:</strong> {user.email}</ListGroup.Item>
+                                <ListGroup.Item><i class="bi bi-geo-alt-fill"></i> <strong>Country:</strong> {user.country}</ListGroup.Item>
+                                <ListGroup.Item><strong><i class="bi bi-geo-fill"></i> City:</strong> {user.city}</ListGroup.Item>
+                                <ListGroup.Item><strong><i class="bi bi-telephone-fill"></i> Phone Number:</strong> {user.phoneNumber}</ListGroup.Item>
                             </ListGroup>
                         </Card.Body>
                     </Card>
                 </Col>
 
                 {/* Related Posts Section */}
-                <Col md={6}>
-                    <h2 className="text-center">Posts by {user.fullName}</h2>
+                <Col md={4}>
+                    <h2 className="text-start">Posts by {user.fullName}</h2>
                     {posts.length === 0 ? (
                         <Alert variant="info" className="text-center">No posts available.</Alert>
                     ) : (
@@ -87,7 +86,8 @@ function UserDetails() {
                                 <Card.Body>
                                     <Link to={`/feeds/${post._id}`} style={{ textDecoration: 'none', color: 'black' }}>
                                         <Card.Title>{post.title}</Card.Title>
-                                        <Card.Text>{post.description}</Card.Text>
+                                        <Card.Text>{post.location}</Card.Text>
+                                        <Card.Text>{post.terms}</Card.Text>
                                     </Link>
                                 </Card.Body>
                             </Card>

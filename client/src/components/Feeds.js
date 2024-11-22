@@ -122,7 +122,7 @@ function Feeds() {
                                         <Card.Text><i class="bi bi-geo-alt-fill"></i> {post.location}</Card.Text>
                                         <Card.Text>{post.description}</Card.Text>
                                         <Card.Text><i class="bi bi-building-fill-exclamation"></i> {post.terms}</Card.Text>
-                                        <Card.Text><i class="bi bi-currency-dollar"></i> {post.salary} $</Card.Text>
+                                        <Card.Text><i class="bi bi-currency-dollar"></i> {post.salary}</Card.Text>
                                     </Link>
                                 </Card.Body>
                             </Card>
