@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
@@ -12,25 +11,24 @@ import EditPost from './components/EditPost';
 import Settings from './components/Settings'; 
 import Navbar from './components/Navbar'; 
 import Footer from './components/Footer'; 
-import PrivateRoute from './components/PrivateRoute'; // Import PrivateRoute
+import PrivateRoute from './components/PrivateRoute'; // PrivateRoute
 import 'bootstrap/dist/css/bootstrap.min.css';
-// src/index.js or src/App.js
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Track login state
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Track login
 
     const handleLogin = () => {
         setIsLoggedIn(true);
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Clear token on logout
+        localStorage.removeItem('token'); // Clear token - logout
         setIsLoggedIn(false); // Update login state
     };
 
     useEffect(() => {
-        // Check if token exists on initial load
+        // Check if token exists
         const token = localStorage.getItem('token');
         if (token) {
             setIsLoggedIn(true);
@@ -39,10 +37,10 @@ function App() {
 
     return (
         <Router>
-            <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} /> {/* Pass login state and logout handler */}
+            <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} /> 
             <Routes>
                 <Route path="/" element={<Homepage />} />
-                <Route path="/login" element={<Login onLogin={handleLogin} />} /> {/* Pass login handler */}
+                <Route path="/login" element={<Login onLogin={handleLogin} />} /> 
                 <Route path="/register" element={<Register />} />
                 <Route path="/feeds" element={<Feeds />} />
                 <Route path="/feeds/:id" element={<PostDetails />} />
@@ -64,7 +62,7 @@ function App() {
                     </PrivateRoute>
                 } />
             </Routes>
-            <Footer /> {/* Add Footer here */}
+            <Footer /> 
         </Router>
     );
 }

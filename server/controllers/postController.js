@@ -1,4 +1,3 @@
-// backend/controllers/postController.js
 const Post = require('../models/Post');
 
 exports.createPost = async (req, res) => {
@@ -14,7 +13,7 @@ exports.createPost = async (req, res) => {
             terms,
             location,
             contactInfo,
-            userId: req.user.id // Get user ID from the authenticated request
+            userId: req.user.id // Get user ID
         });
 
         await newPost.save();
@@ -26,7 +25,7 @@ exports.createPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find().populate('userId', 'fullName'); // Optionally populate user info if needed
+        const posts = await Post.find().populate('userId', 'fullName'); 
         res.json(posts);
     } catch (error) {
         res.status(500).json({ error });
@@ -35,7 +34,7 @@ exports.getAllPosts = async (req, res) => {
 
 exports.getPostById = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id).populate('userId', 'fullName'); // Populate userId with fullName
+        const post = await Post.findById(req.params.id).populate('userId', 'fullName'); 
         if (!post) return res.status(404).json({ message: 'Post not found' });
         res.json(post);
     } catch (error) {
@@ -64,10 +63,10 @@ exports.deletePost = async (req, res) => {
 };
 
 
-// New function to get posts by user ID
+// Posts by user ID
 exports.getPostsByUserId = async (req, res) => {
     try {
-        const posts = await Post.find({ userId: req.params.userId }); // Fetch posts where userId matches
+        const posts = await Post.find({ userId: req.params.userId }); 
         res.json(posts);
     } catch (error) {
         res.status(500).json({ error });
@@ -75,11 +74,11 @@ exports.getPostsByUserId = async (req, res) => {
 };
 
 
-// New function to get related posts by user ID
+// Related posts by user ID
 exports.getRelatedPosts = async (req, res) => {
     try {
-        const { userId } = req.params; // Get user ID from request parameters
-        const relatedPosts = await Post.find({ userId }).limit(4); // Fetch 4 posts by the same user
+        const { userId } = req.params; 
+        const relatedPosts = await Post.find({ userId }).limit(4); // Posts (limit)
         res.json(relatedPosts);
     } catch (error) {
         res.status(500).json({ error });

@@ -1,4 +1,3 @@
-// backend/models/Post.js
 const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
@@ -11,7 +10,7 @@ const PostSchema = new mongoose.Schema({
     location: { type: String, required: true },
     contactInfo: { type: String, required: true },
     postedAt: { type: Date, default: Date.now },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // Reference to the user who posted
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // User posted
 });
 
 module.exports = mongoose.model('Post', PostSchema);
