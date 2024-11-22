@@ -13,6 +13,7 @@ const Login = ({ onLogin }) => { // Accept onLogin prop
         try {
             const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
             localStorage.setItem('token', response.data.token); // Store JWT token
+            localStorage.setItem('userId', response.data.userId); // Store User ID
             onLogin(); // Call the onLogin function to update state in App.js
             alert('Login successful!');
             navigate('/feeds'); // Redirect to feeds page

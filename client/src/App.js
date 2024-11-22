@@ -12,6 +12,7 @@ import EditPost from './components/EditPost';
 import Settings from './components/Settings'; 
 import Navbar from './components/Navbar'; 
 import Footer from './components/Footer'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Track login state
