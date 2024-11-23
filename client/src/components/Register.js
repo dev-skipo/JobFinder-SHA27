@@ -55,7 +55,7 @@ function Register() {
     <section className="Page-layout d-flex align-items-center justify-content-center">
 
     <Container >
-      <h1 className="text-start mt-5 fw-bold">Creat an <span className="text-danger">Account ?</span></h1>
+      <h1 className="text-start mt-5 fw-bold">Create an <span className="text-danger">Account ?</span></h1>
       <p className="pb-5 text-muted">Its 100% Free.</p>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
