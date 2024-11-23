@@ -65,178 +65,174 @@ function PostDetails() {
   };
 
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col md={8}>
-          <h1>{post.title}</h1>
-          <Card className="mb-4">
-            <Card.Body>
-              {/* <Card.Title>{post.title}</Card.Title> */}
-              <Card.Subtitle className="mb-2 text-muted p-2">
-                Posted By:&nbsp;
-                {post.userId ? (
-                  <Link
-                    to={`/user/${post.userId._id}`}
-                    style={{ color: "blue", textDecoration: "underline" }}
-                  >
-                    {post.userId.fullName}
-                  </Link>
-                ) : (
-                  " Unknown User"
-                )}
-              </Card.Subtitle>
-              <Card.Text>{post.description}</Card.Text>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <strong>
-                    <i class="bi bi-search"></i> Requirement:
-                  </strong>{" "}
-                  {post.requirement}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <strong>
-                    <i class="bi bi-currency-dollar"></i> Salary:
-                  </strong>{" "}
-                  {post.salary}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <strong>
-                    <i class="bi bi-signpost-split-fill"></i> Position:
-                  </strong>{" "}
-                  {post.position}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <strong>
-                    <i class="bi bi-building-check"></i> Terms:
-                  </strong>{" "}
-                  {post.terms}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <strong>
-                    <i class="bi bi-geo-alt-fill"></i> Location:
-                  </strong>{" "}
-                  {post.location}
-                </ListGroup.Item>
-              </ListGroup>
-
-              {token ? (
-                <>
-                  {post.userId && post.userId._id === userId && (
-                    <>
-                      <Button
-                        variant="warning"
-                        onClick={() => navigate(`/edit-post/${id}`)}
-                      >
-                        <i class="bi bi-pencil-fill"></i> Edit
-                      </Button>{" "}
-                      <Button
-                        variant="danger"
-                        onClick={() => setShowModal(true)}
-                      >
-                        <i class="bi bi-trash3-fill"></i> Delete
-                      </Button>
-                    </>
-                  )}
-                  <p className="px-3 pt-4">
-                    <strong>
-                      <i className="bi bi-envelope-check-fill"></i> Contact
-                      Info:{" "}
-                    </strong>
-                    <a
-                      href={
-                        post.contactInfo.includes("@")
-                          ? `mailto:${post.contactInfo}` // Email
-                          : post.contactInfo.startsWith("http")
-                          ? post.contactInfo // URL
-                          : post.contactInfo.startsWith("+") ||
-                            post.contactInfo.startsWith("0")
-                          ? `tel:${post.contactInfo}` // Phone number
-                          : "#"
-                      }
-                      style={{ textDecoration: "none", color: "blue" }}
-                    >
-                      {post.contactInfo}
-                    </a>
-                  </p>
-                </>
-              ) : (
-                <Alert variant="info">
-                  <strong>Contact Info:</strong>
-                  <Link
-                    to="/login"
-                    style={{ color: "blue", textDecoration: "underline" }}
-                  >
-                    # Login to see contact information
-                  </Link>
-                </Alert>
-              )}
-
-              <p className="mt-3">
-                <small>
-                  Posted at: {new Date(post.postedAt).toLocaleString()}
-                </small>
-              </p>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col md={4}>
-          <h2 className="text-start">Related Posts</h2>
-          {relatedPosts.length === 0 ? (
-            <Alert variant="info" className="text-center">
-              No related posts available.
-            </Alert>
-          ) : (
-            relatedPosts.slice(0, 5).map(
-              (
-                relatedPost // Limit to 5 posts
-              ) => (
-                <Card key={relatedPost._id} className="mb-3">
-                  <Card.Body>
+      <Container className="mt-5 py-5">
+        <Row>
+          <Col md={8}>
+            <h1>{post.title}</h1>
+            <Card className="mb-4">
+              <Card.Body>
+                {/* <Card.Title>{post.title}</Card.Title> */}
+                <Card.Subtitle className="mb-2 text-muted p-2">
+                  Posted By:&nbsp;
+                  {post.userId ? (
                     <Link
-                      to={`/feeds/${relatedPost._id}`}
-                      style={{ textDecoration: "none", color: "black" }}
+                      to={`/user/${post.userId._id}`}
+                      style={{ color: "blue", textDecoration: "underline" }}
                     >
-                      <Card.Title>{relatedPost.title}</Card.Title>
-                      {/* maximum of 100 characters */}
-                      <Card.Text>
-                        {relatedPost.description.length > 100
-                          ? `${relatedPost.description.substring(0, 150)}...`
-                          : relatedPost.description}
-                      </Card.Text>
+                      {post.userId.fullName}
                     </Link>
-                  </Card.Body>
-                </Card>
-              )
-            )
-          )}
-        </Col>
-      </Row>
+                  ) : (
+                    " Unknown User"
+                  )}
+                </Card.Subtitle>
+                <Card.Text className="px-3 text-muted">
+                  {post.description}
+                </Card.Text>
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                    <strong>
+                      <i class="bi bi-search"></i> Requirement:
+                    </strong>{" "}
+                    {post.requirement}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <strong>Salary:</strong> {post.salary} $
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <strong>Position:</strong> {post.position}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <strong>
+                      <i class="bi bi-building-check"></i> Terms:
+                    </strong>{" "}
+                    {post.terms}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <strong>
+                      <i class="bi bi-geo-alt-fill"></i> Location:
+                    </strong>{" "}
+                    {post.location}
+                  </ListGroup.Item>
+                </ListGroup>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete this post? This action cannot be
-          undone.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Cancel
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => {
-              handleDelete();
-              setShowModal(false);
-            }}
-          >
-            Delete Forever
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+                {token ? (
+                  <>
+                    {post.userId && post.userId._id === userId && (
+                      <>
+                        <Button
+                          variant="warning"
+                          onClick={() => navigate(`/edit-post/${id}`)}
+                        >
+                          <i class="bi bi-pencil-fill"></i> Edit
+                        </Button>{" "}
+                        <Button
+                          variant="danger"
+                          onClick={() => setShowModal(true)}
+                        >
+                          <i class="bi bi-trash3-fill"></i> Delete
+                        </Button>
+                      </>
+                    )}
+                    <p className="px-3 pt-4">
+                      <strong>
+                        <i className="bi bi-envelope-check-fill"></i> Contact
+                        Info:{" "}
+                      </strong>
+                      <a
+                        href={
+                          post.contactInfo.includes("@")
+                            ? `mailto:${post.contactInfo}` // Email
+                            : post.contactInfo.startsWith("http")
+                            ? post.contactInfo // URL
+                            : post.contactInfo.startsWith("+") ||
+                              post.contactInfo.startsWith("0")
+                            ? `tel:${post.contactInfo}` // Phone number
+                            : "#"
+                        }
+                        style={{ textDecoration: "none", color: "blue" }}
+                      >
+                        {post.contactInfo}
+                      </a>
+                    </p>
+                  </>
+                ) : (
+                  <Alert variant="info">
+                    <strong>Contact Info:</strong>
+                    <Link
+                      to="/login"
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      # Login to see contact information
+                    </Link>
+                  </Alert>
+                )}
+
+                <p className="mt-3">
+                  <small>
+                    Posted at: {new Date(post.postedAt).toLocaleString()}
+                  </small>
+                </p>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={4}>
+            <h2 className="text-start">Related Posts</h2>
+            {relatedPosts.length === 0 ? (
+              <Alert variant="info" className="text-center">
+                No related posts available.
+              </Alert>
+            ) : (
+              relatedPosts.slice(0, 5).map(
+                (
+                  relatedPost // Limit to 5 posts
+                ) => (
+                  <Card key={relatedPost._id} className="mb-3">
+                    <Card.Body>
+                      <Link
+                        to={`/feeds/${relatedPost._id}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <Card.Title>{relatedPost.title}</Card.Title>
+                        {/* maximum of 100 characters */}
+                        <Card.Text>
+                          {relatedPost.description.length > 100
+                            ? `${relatedPost.description.substring(0, 150)}...`
+                            : relatedPost.description}
+                        </Card.Text>
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                )
+              )
+            )}
+          </Col>
+        </Row>
+
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Deletion</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete this post? This action cannot be
+            undone.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowModal(false)}>
+              Cancel
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => {
+                handleDelete();
+                setShowModal(false);
+              }}
+            >
+              Delete Forever
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </Container>
   );
 }
 

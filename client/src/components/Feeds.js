@@ -78,7 +78,7 @@ function Feeds() {
   if (error) return <p>{error}</p>;
 
   return (
-    <Container>
+    <Container className="mt-5 py-5">
       <h1>Feeds</h1>
 
       {/* Filter Section with Dropdown */}

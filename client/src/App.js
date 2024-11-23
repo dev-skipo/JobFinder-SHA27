@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './App.css'; // CSS
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Track login

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function NavigationBar({ isLoggedIn, onLogout }) {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="fixed-top shadow-sm" bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <i class="bi bi-triangle"></i> JobFinder

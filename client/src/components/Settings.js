@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import "./style/PostForm.css"; // css
 
 function Settings() {
   const [userData, setUserData] = useState({
@@ -68,10 +69,12 @@ function Settings() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <Container className="mt-5">
-      <h1 className="text-center">Settings</h1>
+    <section className="Page-layout d-flex align-items-center justify-content-center">
+    <Container >
+      <h1 className="text-start py-3 pb-5"><i class="bi bi-sliders2"></i> Settings</h1>
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       <Form onSubmit={handleSubmit}>
+      <p className="pb-4 text-muted">Personal Informations</p>
         <Row className="mb-3">
           <Col>
             <Form.Group controlId="formFullName">
@@ -160,7 +163,7 @@ function Settings() {
             </Form.Group>
           </Col>
         </Row>
-        <Row className="mb-3">
+        <Row className="mb-3 pb-4">
           <Col>
             <Form.Group controlId="formPhoneNumber">
               <Form.Label>Phone Number</Form.Label>
@@ -177,21 +180,22 @@ function Settings() {
         </Row>
 
         {!isEditing ? (
-          <Button variant="primary" onClick={() => setIsEditing(true)}>
+          <Button variant="dark" onClick={() => setIsEditing(true)}>
             Edit Profile
           </Button>
         ) : (
           <>
-            <Button variant="success" type="submit">
-              Update Profile
+            <Button variant="dark" type="submit">
+            <i class="bi bi-check2-all"></i> Update Profile
             </Button>{" "}
-            <Button variant="secondary" onClick={() => setIsEditing(false)}>
+            <Button variant="outline-dark" onClick={() => setIsEditing(false)}>
               Cancel
             </Button>
           </>
         )}
       </Form>
     </Container>
+    </section>
   );
 }
 

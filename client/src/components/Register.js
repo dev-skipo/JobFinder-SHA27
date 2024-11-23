@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./style/PostForm.css"; // css
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -51,11 +52,13 @@ function Register() {
   };
 
   return (
-    <Container className="mt-5">
+    <section className="Page-layout d-flex align-items-center justify-content-center bg-light">
+
+    <Container >
       <h1 className="text-center">Register</h1>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
-      <Form onSubmit={handleRegister}>
+      <Form onSubmit={handleRegister} >
         {/* Row 1 */}
         <Row className="mb-3">
           <Col md={4}>
@@ -180,6 +183,7 @@ function Register() {
         </Row>
       </Form>
     </Container>
+    </section>
   );
 }
 

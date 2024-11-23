@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import "./style/PostForm.css"; //css
 
 function PostForm() {
   const [formData, setFormData] = useState({
@@ -38,13 +39,15 @@ function PostForm() {
   };
 
   return (
+    <section className="post-me d-flex align-items-center justify-content-center">
     <Container className="mt-5">
-      <h1 className="text-center">Create Post</h1>
+      <h1 className="text-start py-3"><i class="bi bi-sticky-fill"></i> Create Job Post</h1>
+      <p className="pb-5 text-muted">Keep it clean when posting a job post</p>
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Col>
             <Form.Group controlId="formTitle">
-              <Form.Label>Title</Form.Label>
+              <Form.Label>Job Title</Form.Label>
               <Form.Control
                 type="text"
                 name="title"
@@ -59,7 +62,7 @@ function PostForm() {
         <Row className="mb-3">
           <Col>
             <Form.Group controlId="formDescription">
-              <Form.Label>Description</Form.Label>
+              <Form.Label>Job Description</Form.Label>
               <Form.Control
                 as="textarea"
                 name="description"
@@ -74,7 +77,7 @@ function PostForm() {
         <Row className="mb-3">
           <Col>
             <Form.Group controlId="formRequirement">
-              <Form.Label>Requirement</Form.Label>
+              <Form.Label>Job Requirement</Form.Label>
               <Form.Control
                 as="textarea"
                 name="requirement"
@@ -87,7 +90,7 @@ function PostForm() {
           </Col>
           <Col>
             <Form.Group controlId="formSalary">
-              <Form.Label>Salary</Form.Label>
+              <Form.Label>Job Salary</Form.Label>
               <Form.Control
                 type="number"
                 name="salary"
@@ -136,7 +139,7 @@ function PostForm() {
         <Row className="mb-3">
           <Col md={6}>
             <Form.Group controlId="formLocation">
-              <Form.Label>Location</Form.Label>
+              <Form.Label>Job Location</Form.Label>
               <Form.Control
                 type="text"
                 name="location"
@@ -147,7 +150,7 @@ function PostForm() {
               />
             </Form.Group>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="pb-4">
             <Form.Group controlId="formContactInfo">
               <Form.Label>Contact Info</Form.Label>
               <Form.Control
@@ -162,11 +165,12 @@ function PostForm() {
           </Col>
         </Row>
 
-        <Button variant="primary" type="submit">
-          Create Post
+        <Button variant="dark" type="submit">
+        <i class="bi bi-plus"></i> Create Post 
         </Button>
       </Form>
     </Container>
+    </section>
   );
 }
 

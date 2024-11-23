@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import "./style/PostForm.css"; // css
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -27,8 +28,10 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <Container className="mt-5">
-      <h1 className="text-center">Login</h1>
+    <section className="Page-layout d-flex align-items-center justify-content-center bg-light">
+    <Container>
+    <h1 className="text-center text-dark">Login</h1>
+
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <Form onSubmit={handleLogin}>
         <Row className="mb-3 justify-content-center">
@@ -68,6 +71,7 @@ const Login = ({ onLogin }) => {
         </Row>
       </Form>
     </Container>
+    </section>
   );
 };
 

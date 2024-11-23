@@ -49,7 +49,7 @@ function UserDetails() {
 
   if (!isLoggedIn) {
     return (
-      <Container className="mt-5">
+      <Container className="mt-5 py-5">
         <Alert variant="warning">
           Please{" "}
           <Link
@@ -67,7 +67,7 @@ function UserDetails() {
   if (!user) return <p>No user found.</p>;
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 py-5">
       <Row>
         <Col md={8}>
           <h2 className="text-start">
