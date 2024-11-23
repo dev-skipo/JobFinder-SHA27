@@ -52,13 +52,14 @@ function Register() {
   };
 
   return (
-    <section className="Page-layout d-flex align-items-center justify-content-center bg-light">
+    <section className="Page-layout d-flex align-items-center justify-content-center">
 
     <Container >
-      <h1 className="text-center">Register</h1>
+      <h1 className="text-start mt-5 fw-bold">Creat an <span className="text-danger">Account ?</span></h1>
+      <p className="pb-5 text-muted">Its 100% Free.</p>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
-      <Form onSubmit={handleRegister} >
+      <Form onSubmit={handleRegister}>
         {/* Row 1 */}
         <Row className="mb-3">
           <Col md={4}>
@@ -174,10 +175,10 @@ function Register() {
           </Col>
         </Row>
 
-        <Row className="mb-3 justify-content-end">
+        <Row className="mb-3 pt-4 justify-content-start ">
           <Col md={4}>
-            <Button variant="dark" type="submit">
-              Register
+            <Button variant="danger" type="submit">
+             Register
             </Button>
           </Col>
         </Row>

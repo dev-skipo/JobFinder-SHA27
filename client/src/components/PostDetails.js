@@ -158,14 +158,15 @@ function PostDetails() {
                     </p>
                   </>
                 ) : (
-                  <Alert variant="info">
-                    <strong>Contact Info:</strong>
+                  <Alert variant="danger">
+                    <strong>Contact Info :</strong>
                     <Link
                       to="/login"
                       style={{ color: "blue", textDecoration: "underline" }}
                     >
-                      # Login to see contact information
-                    </Link>
+                    &nbsp; Login 
+                    </Link> 
+                    &nbsp; to see contact information
                   </Alert>
                 )}
 

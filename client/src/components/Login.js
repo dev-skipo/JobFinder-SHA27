@@ -28,9 +28,10 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <section className="Page-layout d-flex align-items-center justify-content-center bg-light">
+    <section className="Page-layout d-flex align-items-center justify-content-center">
     <Container >
-
+<h1 className="text-center py-2 fw-bold">Login to an <span className="text-danger">Account !</span> </h1>
+<p className="text-center pb-5 text-muted" >Search Over 10,000+ Job Posts.</p>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <Form onSubmit={handleLogin}>
         <Row className="mb-3 justify-content-center">
@@ -63,7 +64,7 @@ const Login = ({ onLogin }) => {
         </Row>
         <Row className="mb-3 pt-3 justify-content-center">
           <Col md={4}>
-            <Button variant="dark" type="submit" block>
+            <Button variant="danger" type="submit" block>
               Login
             </Button>
           </Col>

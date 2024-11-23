@@ -12,7 +12,7 @@ body.light {
 }
 
 body.dark {
-    background-color: #222;
+    background-color: #000000;
     color: white;
 }
 
@@ -21,7 +21,8 @@ body.dark {
 }
 
 .navbar.bg-dark {
-    background-color: #343a40 !important; /* Dark mode  */
+    background-color: #0a0a0a !important; /* Dark mode  */
+    color:white;
 }
 
 .navbar.bg-light {

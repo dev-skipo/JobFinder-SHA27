@@ -158,11 +158,11 @@ function Feeds() {
                         : post.description}
                     </Card.Text>
                     <Card.Text>
-                      <i className="bi bi-building-fill-exclamation"></i>{" "}
+                    <i class="bi bi-info-circle"></i>{" "}
                       {post.terms}
                     </Card.Text>
-                    <Card.Text className="text-muted">
-                       {post.salary} <i className="bi bi-currency-dollar"></i>
+                    <Card.Text className="text-danger fw-slim pb-4">
+                       {post.salary} <i className="bi bi-currency-dollar"></i>/ Min
                     </Card.Text>
                   </Link>
                 </Card.Body>
