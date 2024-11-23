@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
       localStorage.setItem("token", response.data.token); // Store JWT token
       localStorage.setItem("userId", response.data.userId); // //  User ID
       onLogin();
-      alert("Login successful!");
+      // alert+("Login successful!"); // Alert for me
       navigate("/feeds"); // Redirect
     } catch (error) {
       setErrorMessage("Login failed! Please check your credentials.");
@@ -29,8 +29,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <section className="Page-layout d-flex align-items-center justify-content-center bg-light">
-    <Container>
-    <h1 className="text-center text-dark">Login</h1>
+    <Container >
 
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <Form onSubmit={handleLogin}>
@@ -62,9 +61,9 @@ const Login = ({ onLogin }) => {
             </Form.Group>
           </Col>
         </Row>
-        <Row className="mb-3 justify-content-center">
+        <Row className="mb-3 pt-3 justify-content-center">
           <Col md={4}>
-            <Button variant="primary" type="submit" block>
+            <Button variant="dark" type="submit" block>
               Login
             </Button>
           </Col>

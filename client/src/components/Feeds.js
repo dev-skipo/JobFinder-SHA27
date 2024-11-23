@@ -79,17 +79,16 @@ function Feeds() {
 
   return (
     <Container className="mt-5 py-5">
-      <h1>Feeds</h1>
 
-      {/* Filter Section with Dropdown */}
+      {/* Filter */}
       <Button 
-        variant="secondary" 
+        variant="outline-dark" 
         onClick={() => setOpenFilters(!openFilters)} 
         aria-controls="filter-collapse" 
         aria-expanded={openFilters}
         className="mb-3"
       >
-        {openFilters ? 'Hide Filters' : 'Show Filters'}
+        {openFilters ? <i class="bi bi-x-lg"></i> : <i class="bi bi-funnel-fill"></i>}
       </Button>
 
       <Collapse in={openFilters}>
@@ -128,7 +127,7 @@ function Feeds() {
             </Col>
 
             <Col>
-              <Button variant="primary" onClick={resetFilters}>
+              <Button variant="dark" onClick={resetFilters}>
                 Reset Filters
               </Button>
             </Col>
@@ -142,14 +141,14 @@ function Feeds() {
         <Row>
           {filteredPosts.map((post) => (
             <Col md={4} key={post._id}>
-              <Card style={{ marginBottom: "20px" }}>
+              <Card style={{ marginBottom: "20px",  boxShadow: "0 2px 2px rgba(0, 0, 0, 0.1)" }}>
                 <Card.Body>
                   <Link
                     to={`/feeds/${post._id}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <Card.Title>{post.title}</Card.Title>
-                    <Card.Text>
+                    <Card.Text className="text-danger">
                       <i className="bi bi-geo-alt-fill"></i> {post.location}
                     </Card.Text>
                     {/* maximum of 100 characters */}
@@ -162,8 +161,8 @@ function Feeds() {
                       <i className="bi bi-building-fill-exclamation"></i>{" "}
                       {post.terms}
                     </Card.Text>
-                    <Card.Text>
-                      <i className="bi bi-currency-dollar"></i> {post.salary}
+                    <Card.Text className="text-muted">
+                       {post.salary} <i className="bi bi-currency-dollar"></i>
                     </Card.Text>
                   </Link>
                 </Card.Body>

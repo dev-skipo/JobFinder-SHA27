@@ -68,16 +68,15 @@ function PostDetails() {
       <Container className="mt-5 py-5">
         <Row>
           <Col md={8}>
-            <h1>{post.title}</h1>
             <Card className="mb-4">
               <Card.Body>
-                {/* <Card.Title>{post.title}</Card.Title> */}
+                <Card.Title className="px-1 fs-1 py-2">{post.title}</Card.Title> 
                 <Card.Subtitle className="mb-2 text-muted p-2">
-                  Posted By:&nbsp;
+                  Posted By: &nbsp;
                   {post.userId ? (
                     <Link
                       to={`/user/${post.userId._id}`}
-                      style={{ color: "blue", textDecoration: "underline" }}
+                      style={{ color: "red", textDecoration: "none" }}
                     >
                       {post.userId.fullName}
                     </Link>
@@ -85,31 +84,31 @@ function PostDetails() {
                     " Unknown User"
                   )}
                 </Card.Subtitle>
-                <Card.Text className="px-3 text-muted">
+                <Card.Text className="px-3 text-dark">
                   {post.description}
                 </Card.Text>
                 <ListGroup variant="flush">
-                  <ListGroup.Item>
-                    <strong>
-                      <i class="bi bi-search"></i> Requirement:
+                  <ListGroup.Item className="text-muted">
+                    <strong >
+                      Requirement :
                     </strong>{" "}
                     {post.requirement}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <strong>Salary:</strong> {post.salary} $
+                    <strong className="text-dark">Salary :</strong> {post.salary} $
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <strong>Position:</strong> {post.position}
+                    <strong className="text-dark">Position :</strong> {post.position}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <strong>
-                      <i class="bi bi-building-check"></i> Terms:
+                    <strong className="text-dark">
+                      Terms :
                     </strong>{" "}
                     {post.terms}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <strong>
-                      <i class="bi bi-geo-alt-fill"></i> Location:
+                    <strong className="text-danger">
+                      Location :
                     </strong>{" "}
                     {post.location}
                   </ListGroup.Item>
@@ -119,24 +118,27 @@ function PostDetails() {
                   <>
                     {post.userId && post.userId._id === userId && (
                       <>
+                      <br/>
                         <Button
-                          variant="warning"
+                          variant="outline-dark"
+                          className="rounded-pill border-3 me-1"
                           onClick={() => navigate(`/edit-post/${id}`)}
                         >
-                          <i class="bi bi-pencil-fill"></i> Edit
+                          <i class="bi bi-pencil-fill"></i> Edit Post
                         </Button>{" "}
                         <Button
-                          variant="danger"
+                          variant="outline-danger"
+                          className="rounded-pill border-3"
                           onClick={() => setShowModal(true)}
                         >
-                          <i class="bi bi-trash3-fill"></i> Delete
+                          <i class="bi bi-trash3-fill"></i> Delete Post
                         </Button>
                       </>
                     )}
                     <p className="px-3 pt-4">
                       <strong>
                         <i className="bi bi-envelope-check-fill"></i> Contact
-                        Info:{" "}
+                        Info :{" "}
                       </strong>
                       <a
                         href={
@@ -149,9 +151,9 @@ function PostDetails() {
                             ? `tel:${post.contactInfo}` // Phone number
                             : "#"
                         }
-                        style={{ textDecoration: "none", color: "blue" }}
+                        style={{ textDecoration: "none", color: "red" }}
                       >
-                        {post.contactInfo}
+                      &nbsp;  {post.contactInfo}
                       </a>
                     </p>
                   </>
@@ -218,7 +220,7 @@ function PostDetails() {
             undone.
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
+            <Button variant="outline-dark" onClick={() => setShowModal(false)}>
               Cancel
             </Button>
             <Button

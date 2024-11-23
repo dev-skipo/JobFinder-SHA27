@@ -9,7 +9,7 @@ function Homepage() {
         <Container>
           <h1>Welcome to JobFinder</h1>
           <p>Your one-stop solution for finding and posting jobs.</p>
-          <Button className="rounded-pill" variant="primary" href="/feeds">
+          <Button className="rounded-pill" variant="danger" href="/feeds">
             Search Jobs
           </Button>
         </Container>
@@ -19,7 +19,7 @@ function Homepage() {
         <Container className="text-center">
           <h1>Are You an Employer?</h1>
           <p>Post your job offers and find the right candidates.</p>
-          <Button className="rounded-pill" variant="success" href="/post">
+          <Button className="rounded-pill" variant="dark" href="/post">
             Post a Job
           </Button>
         </Container>

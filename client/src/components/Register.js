@@ -176,7 +176,7 @@ function Register() {
 
         <Row className="mb-3 justify-content-end">
           <Col md={4}>
-            <Button variant="primary" type="submit">
+            <Button variant="dark" type="submit">
               Register
             </Button>
           </Col>

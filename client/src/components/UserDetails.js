@@ -80,23 +80,23 @@ function UserDetails() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <strong>
-                    <i class="bi bi-envelope-fill"></i> Mail:
-                  </strong>{" "}
+                    <i class="bi bi-envelope-fill"></i> Contact Information : &nbsp;
+                  </strong>{"  "}
                   {user.email}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <i class="bi bi-geo-alt-fill"></i> <strong>Country:</strong>{" "}
+                  <i class="bi bi-geo-alt-fill"></i> <strong>Country : &nbsp;</strong>{" "}
                   {user.country}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <strong>
-                    <i class="bi bi-geo-fill"></i> City:
+                    <i class="bi bi-geo-fill"></i> City : &nbsp;
                   </strong>{" "}
                   {user.city}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <strong>
-                    <i class="bi bi-telephone-fill"></i> Phone Number:
+                    <i class="bi bi-telephone-fill"></i> Phone Number : &nbsp;
                   </strong>{" "}
                   {user.phoneNumber}
                 </ListGroup.Item>
@@ -124,7 +124,6 @@ function UserDetails() {
                     >
                       <Card.Title>{post.title}</Card.Title>
                       <Card.Text>{post.location}</Card.Text>
-                      <Card.Text>{post.terms}</Card.Text>
                     </Link>
                   </Card.Body>
                 </Card>

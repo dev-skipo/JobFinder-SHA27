@@ -55,8 +55,8 @@ function EditPost() {
   };
 
   return (
-    <Container className="mt-5">
-      <h1 className="text-center">Edit Post</h1>
+    <Container className="mt-5 py-5">
+      <h1 className="text-start py-3">Edit Post</h1>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       <Form onSubmit={handleSubmit}>
@@ -152,7 +152,7 @@ function EditPost() {
             </Form.Group>
           </Col>
         </Row>
-        <Row className="mb-3">
+        <Row className="mb-3 pb-4">
           <Col md={6}>
             <Form.Group controlId="formLocation">
               <Form.Label>Location</Form.Label>
@@ -181,8 +181,8 @@ function EditPost() {
           </Col>
         </Row>
 
-        <Button variant="primary" type="submit">
-          Update Post
+        <Button variant="dark" type="submit">
+        <i class="bi bi-arrow-clockwise"></i> Update Post
         </Button>
       </Form>
     </Container>
