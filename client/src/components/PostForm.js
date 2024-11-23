@@ -40,8 +40,8 @@ function PostForm() {
 
   return (
     <section className="post-me d-flex align-items-center justify-content-center">
-    <Container className="mt-5">
-      <h1 className="text-start py-3"><i class="bi bi-sticky-fill"></i> Create Job Post</h1>
+    <Container className="mt-2">
+      <h1 className="text-start py-4"><i class="bi bi-sticky-fill"></i> Create Job Post</h1>
       <p className="pb-4 text-muted">Keep it clean when posting a job post</p>
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">

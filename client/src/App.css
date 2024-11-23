@@ -3,3 +3,27 @@
 body {
     font-family: "Asap Condensed", serif;
 }
+
+
+/* DarkMode Css */
+body.light {
+    background-color: white;
+    color: black;
+}
+
+body.dark {
+    background-color: #222;
+    color: white;
+}
+
+.navbar {
+    transition: background-color 0.3s ease;
+}
+
+.navbar.bg-dark {
+    background-color: #343a40 !important; /* Dark mode  */
+}
+
+.navbar.bg-light {
+    background-color: #f8f9fa !important; /* Light mode */
+}
