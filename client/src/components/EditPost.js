@@ -54,11 +54,17 @@ function EditPost() {
     }
   };
 
+  // Function to handle back navigation
+  const handleBack = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
   return (
     <Container className="mt-5 py-5">
       <h1 className="text-start py-3">Edit Post</h1>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
+      
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Col md={6}>
@@ -181,9 +187,21 @@ function EditPost() {
           </Col>
         </Row>
 
-        <Button variant="dark" type="submit">
-        <i class="bi bi-arrow-clockwise"></i> Update Post
-        </Button>
+
+        <Row className="mb-3">
+
+          <Col md={6} className="d-flex justify-content-start">
+            <Button variant="outline-danger" onClick={handleBack} className='me-2 rounded-pill'>
+            <i class="bi bi-arrow-left-circle"></i> Go Back
+            </Button>
+
+            <Button variant="dark" type="submit" className='me-2 rounded-pill'> 
+            <i class="bi bi-check-circle"></i> Update Post
+            </Button>
+
+          </Col>
+        </Row>
+
       </Form>
     </Container>
   );

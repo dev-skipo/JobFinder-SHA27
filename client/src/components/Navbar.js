@@ -42,9 +42,9 @@ function NavigationBar({ isLoggedIn, onLogout }) {
               </>
             )}
           </Nav>
-          {/* toggle themes */}
-          <button onClick={toggleTheme} style={{ marginLeft: '20px', border: 'none', background: 'none', cursor: 'pointer' }}>
-            {theme === 'light' ? '🌙' : '☀️'} {/* Emoji Better*/}
+          {/* toggle themes - Under Dev + */}
+          <button className="d-none" onClick={toggleTheme} style={{ marginLeft: '20px', border: 'none', background: 'none', cursor: 'pointer' }}>
+            {theme === 'light' ? <i class="bi bi-moon-fill"></i> : <i class="bi bi-brightness-low-fill"></i>} {/* '☀️' Emoji*/}
           </button>
         </Navbar.Collapse>
       </Container>
