@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./style/PostForm.css"; // css
 
 const Login = ({ onLogin }) => {
@@ -67,6 +68,7 @@ const Login = ({ onLogin }) => {
             <Button variant="danger" type="submit" block>
               Login
             </Button>
+            <p className="pt-4 text-muted">Don't have an account yet? <Link to="/register">Register</Link></p>
           </Col>
         </Row>
       </Form>

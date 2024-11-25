@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./style/PostForm.css"; // css
 
 function Register() {
@@ -180,6 +181,7 @@ function Register() {
             <Button variant="danger" type="submit">
              Register
             </Button>
+            <p className="pt-4 text-muted">Already have an account? <Link to="/login">Login</Link></p>
           </Col>
         </Row>
       </Form>
