@@ -23,7 +23,7 @@ function EditPost() {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/${id}`
+          `https://jobfinder-sha27.onrender.com/api/posts/${id}`
         );
         setFormData(response.data);
       } catch (err) {
@@ -42,7 +42,7 @@ function EditPost() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:5000/api/posts/${id}`, formData, {
+      await axios.put(`https://jobfinder-sha27.onrender.com/api/posts/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

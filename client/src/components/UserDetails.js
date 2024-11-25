@@ -15,7 +15,7 @@ function UserDetails() {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/api/users/${id}`,
+          `https://jobfinder-sha27.onrender.com/api/users/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -25,7 +25,7 @@ function UserDetails() {
         setUser(response.data);
 
         const postsResponse = await axios.get(
-          `http://localhost:5000/api/posts/user/${id}`,
+          `https://jobfinder-sha27.onrender.com/api/posts/user/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

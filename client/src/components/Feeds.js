@@ -20,7 +20,7 @@ function Feeds() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/posts");
+      const response = await axios.get("https://jobfinder-sha27.onrender.com/api/posts");
       const sortedPosts = response.data.sort(
         (a, b) => new Date(b.postedAt) - new Date(a.postedAt)
       );

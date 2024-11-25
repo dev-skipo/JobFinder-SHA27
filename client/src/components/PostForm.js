@@ -26,7 +26,7 @@ function PostForm() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token"); // JWT token - local storage
-      await axios.post("http://localhost:5000/api/posts", formData, {
+      await axios.post("https://jobfinder-sha27.onrender.com/api/posts", formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Token - headers - authentication
         },

@@ -25,12 +25,12 @@ function PostDetails() {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/${id}`
+          `https://jobfinder-sha27.onrender.com/api/posts/${id}`
         );
         setPost(response.data);
 
         const relatedResponse = await axios.get(
-          `http://localhost:5000/api/posts/user/${response.data.userId._id}`
+          `https://jobfinder-sha27.onrender.com/api/posts/user/${response.data.userId._id}`
         );
         setRelatedPosts(relatedResponse.data);
       } catch (err) {
@@ -52,7 +52,7 @@ function PostDetails() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/posts/${id}`, {
+      await axios.delete(`https://jobfinder-sha27.onrender.com/api/posts/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Token - headers - authentication
         },

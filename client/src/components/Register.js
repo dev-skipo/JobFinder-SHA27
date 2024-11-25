@@ -27,7 +27,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/users/register", formData);
+      await axios.post("https://jobfinder-sha27.onrender.com/api/users/register", formData);
       setSuccessMessage("Registration successful! Redirecting to login...");
       setErrorMessage("");
 

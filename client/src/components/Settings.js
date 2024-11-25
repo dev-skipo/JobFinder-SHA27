@@ -24,7 +24,7 @@ function Settings() {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/api/users/${localStorage.getItem("userId")}`,
+          `https://jobfinder-sha27.onrender.com/api/users/${localStorage.getItem("userId")}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ function Settings() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/users/${localStorage.getItem("userId")}`,
+        `https://jobfinder-sha27.onrender.com/api/users/${localStorage.getItem("userId")}`,
         userData,
         {
           headers: {
